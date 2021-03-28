@@ -11,33 +11,68 @@ import java.util.Stack;
  *
  * @author SAMSUNG
  */
+import java.util.*;
+ 
 public class BalancedBrackets {
-    static String isBalanced(String s){
-        Stack<Character> stack = new Stack();
-        
-        for (int i=0; i<s.length(); i++){
-            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){
-                stack.push(s.charAt(i));
-            } else {
-                if (stack.isEmpty()){
-                    return "NO";
-                }else {
-                    char pop_val = stack.pop();
-                    if(s.charAt(i) == ')' && pop_val != '('){
-                       return "NO"; 
-                    } else if(s.charAt(i) == '{' && pop_val != '{' ){
-                        return "NO";
-                    } else if(s.charAt(i) == '[' && pop_val != '[' ){
-                        return "NO";
-                    }
-                
+ 
+    // function to check if brackets are balanced
+    static boolean areBracketsBalanced(String expr)
+    {
+        // Using ArrayDeque is faster than using Stack class
+        Deque<Character> stack = new ArrayDeque<Character>();
+ 
+        // Traversing the Expression
+        for (int i = 0; i < expr.length(); i++)
+        {
+            char x = expr.charAt(i);
+ 
+            if (x == '(' || x == '[' || x == '{')
+            {
+                // Push the element in the stack
+                stack.push(x);
+                continue;
+            }
+ 
+            // If current character is not opening
+            // bracket, then it must be closing. So stack
+            // cannot be empty at this point.
+            if (stack.isEmpty())
+                return false;
+            char check;
+            switch (x) {
+            case ')':
+                check = stack.pop();
+                if (check == '{' || check == '[')
+                    return false;
+                break;
+ 
+            case '}':
+                check = stack.pop();
+                if (check == '(' || check == '[')
+                    return false;
+                break;
+ 
+            case ']':
+                check = stack.pop();
+                if (check == '(' || check == '{')
+                    return false;
+                break;
             }
         }
+ 
+        // Check Empty Stack
+        return (stack.isEmpty());
     }
-        if(stack.isEmpty()){
-            return "YES";
-        } else{
-            return "NO";
-        }
+ 
+    // Driver code
+    public static void main(String[] args)
+    {
+        String expr = "([(){}])";
+ 
+        // Function call
+        if (areBracketsBalanced(expr))
+            System.out.println("Input : " + expr + "\t Output : " + "YES");
+        else
+            System.out.println("Input : " + expr + "\t Output : " + "NO");
     }
 }

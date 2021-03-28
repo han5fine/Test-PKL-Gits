@@ -9,25 +9,21 @@ package testpkl;
  *
  * @author SAMSUNG
  */
-public class MaxConsecutiveOnes {
+    public class MaxConsecutiveOnes {
 
-   class solutions{
-       public int findMaxConsecutiveOnes(int[] nums){
-           int max = 0;
-           int current_number_of_ones = 0;
-           
-           for (int i=0; i<nums.length; i++){
-               if (nums[i] == 1){
-                   current_number_of_ones += 1;
-                   max = Math.max(max, current_number_of_ones);
-               }else{
-                   current_number_of_ones = 0;
-               }
-           }
-           
-           return max;
-        
+      public int findMaxConsecutiveOnes(int[] input) {
+      int currentCount = 0;
+      int max = 0;
+      for (int n : input) {
+      currentCount = n == 0 ? 0 : currentCount + 1;
+      max = Math.max(max, currentCount);
+      }
+      return max;
     }
-   }
-    
+ 
+        public static void main(String[] args) {
+         int[] input = { 1, 1, 1, 1, 0, 1, 1, 1 };
+         System.out.println(new MaxConsecutiveOnes().findMaxConsecutiveOnes(input));
+    }
 }
+    

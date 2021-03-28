@@ -5,28 +5,27 @@
  */
 package testpkl;
 
+
 /**
  *
  * @author SAMSUNG
  */
-public class reverseString {
-    public static void main(String[] args){
-        String r = reverse("Hi, get well soon");
-        System.out.println(r);
+
+
+public class ReverseString {
+
+    public static void main(String[] args) {
+        String str = "Ayo PKL" ;
+        String reverse = ReverseString(str);
+        System.out.println("The reversed string is: " + reverse);
     }
-    public static String reverse(String s){
-        char[] letters = new char[s.length()];
-        
-        int letterIndex = 0;
-        for(int i = s.length() - 1; i>= 0; i--){
-            letters[letterIndex] = s.charAt(i);
-            letterIndex++;
-        }
-        
-        String reverse = "";
-        for(int i = 0; i < s.length(); i++){
-            reverse = reverse + letters[i];
-        }
-        return reverse;
+
+    public static String ReverseString(String str)
+    {
+        if (str.isEmpty())
+            return str;
+        //memanggil fungsi rekrusif
+        return ReverseString(str.substring(1)) + str.charAt(0);
     }
 }
+
